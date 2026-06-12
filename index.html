@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier | Sewing & Accessories</title>
+    <!-- Google Fonts: Inter for sleek modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="family">
+
+    <style>
+        /* --- BRAND IDENTITY & DESIGN SYSTEM (The Row x Toteme) --- */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #111111;
+            --text-muted: #767676;
+            --border-color: #e5e5e5;
+            /* Razor-thin borders inspired by Toteme */
+            --font-tracking: 0.18em;
+            /* Tiny, spaced out uppercase text */
+            --grid-gap: 40px;
+            --service-bg: #fafafa;
+            --gallery-bg: #fafafa;
+            --header-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-main: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --border-color: #2a2a2a;
+            --service-bg: #151515;
+            --gallery-bg: #151515;
+            --header-bg: rgba(10, 10, 10, 0.95);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            padding-top: 90px;
+            /* Offset for fixed luxury header */
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1,
+        h2,
+        h3,
+        .nav-link,
+        .label,
+        button {
+            text-transform: uppercase;
+            letter-spacing: var(--font-tracking);
+            font-weight: 300;
+        }
+
+        p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            font-weight: 300;
+            color: var(--text-main);
+        }
+
+        /* --- FIXED HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4%;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-main);
+        }
+
+        /* --- THEME TOGGLE BUTTON --- */
+        .theme-toggle {
+            width: 50px;
+            height: 24px;
+            background-color: var(--border-color);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--text-muted);
+        }
+
+        .theme-toggle-slider {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background-color: var(--text-main);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="dark"] .theme-toggle-slider {
+            transform: translateX(26px);
+        }
+
+        .theme-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-right: 10px;
+            text-transform: uppercase;
+            letter-spacing: var(--font-tracking);
+        }
+
+        /* --- GENERAL STRUCTURE --- */
+        section {
+            padding: 100px 4%;
+            border-bottom: 1px solid var(--border-color);
+            min-height: auto;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-header .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        /* --- SECTION: HOME (HERO) --- */
+        #home {
+            min-height: calc(100vh - 90px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 60px 4%;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            align-items: start;
+            gap: var(--grid-gap);
+        }
+
+        .hero-text {
+            max-width: 520px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.2rem;
+            line-height: 1.3;
+            margin-bottom: 25px;
+        }
+
+        .hero-text p {
+            margin-bottom: 35px;
+            color: var(--text-muted);
+        }
+
+        .hero-image-wrapper {
+            width: 100%;
+            height: 500px;
+            background-color: var(--service-bg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- TWO COLUMN FUNCTIONAL LAYOUT (Alterations / Bridal / Repair) --- */
+        .service-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--grid-gap);
+            align-items: start;
+        }
+
+        .service-details {
+            max-width: 480px;
+        }
+
+        .service-details p {
+            margin-bottom: 20px;
+        }
+
+        .spec-list {
+            list-style: none;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .spec-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+        }
+
+        .spec-list li span {
+            color: var(--text-main);
+        }
+
+        .service-visual {
+            width: 100%;
+            height: 450px;
+            background-color: var(--service-bg);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        /* --- SECTION: GALLERY (Toteme Inspired Modular Grid) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            max-height: 230px;
+            border: 1px solid var(--border-color);
+            background-color: var(--gallery-bg);
+            padding: 0;
+            transition: border-color 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: #111;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* --- SECTION: TESTIMONIALS --- */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--grid-gap);
+        }
+
+        .testimonial-item {
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            background-color: var(--service-bg);
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        /* --- SECTION: CONTACTS --- */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--grid-gap);
+        }
+
+        .contact-info h3 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+
+        .contact-info h3:first-child {
+            margin-top: 0;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        /* MINIMALIST CONTACT FORM */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .form-group label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: var(--font-tracking);
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        form input,
+        form textarea,
+        form select {
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 0;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            background: transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        form select {
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23767676' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0 center;
+            background-size: 20px;
+            padding-right: 25px;
+        }
+
+        [data-theme="dark"] form select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        }
+
+        form select option {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 10px;
+        }
+
+        form input:focus,
+        form textarea:focus,
+        form select:focus {
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        form textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        /* BUTTON DESIGN */
+        button,
+        .btn {
+            display: inline-block;
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            border: none;
+            padding: 18px 40px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        button:hover,
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 60px 4%;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: var(--font-tracking);
+            color: var(--text-muted);
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            header {
+                height: 70px;
+                flex-direction: column;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .nav-link {
+                font-size: 0.65rem;
+            }
+
+            #home {
+                height: auto;
+                padding: 60px 4%;
+            }
+
+            .hero-container,
+            .service-layout,
+            .gallery-grid,
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .service-visual {
+                height: 300px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- STAGGERED LOADING ANIMATIONS --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays for gallery items */
+        .gallery-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .gallery-item:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .gallery-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .gallery-item:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .gallery-item:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        .gallery-item:nth-child(6) {
+            transition-delay: 0.6s;
+        }
+
+        .gallery-item:nth-child(7) {
+            transition-delay: 0.7s;
+        }
+
+        .gallery-item:nth-child(8) {
+            transition-delay: 0.8s;
+        }
+
+        .gallery-item:nth-child(9) {
+            transition-delay: 0.9s;
+        }
+
+        .gallery-item:nth-child(10) {
+            transition-delay: 1s;
+        }
+
+        /* Testimonial stagger */
+        .testimonial-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .testimonial-item:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        .testimonial-item:nth-child(3) {
+            transition-delay: 0.5s;
+        }
+
+        /* --- LIGHTBOX MODAL --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .lightbox-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border: 2px solid var(--border-color);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LUXURY FIXED HEADER -->
+    <header>
+        <a href="#home" class="logo">RAISA'S SEWING AND ACCESSOIRIES</a>
+        <nav>
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#alterations" class="nav-link">Alterations</a>
+            <a href="#bridal" class="nav-link">Bridal</a>
+            <a href="#repair" class="nav-link">Repair</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#testimonials" class="nav-link">Testimonials</a>
+            <a href="#contacts" class="nav-link">Contacts</a>
+        </nav>
+        <div style="display: flex; align-items: center;">
+            <span class="theme-label">Theme</span>
+            <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme">
+                <div class="theme-toggle-slider"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION: HOME -->
+    <section id="home">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>About Raisa.<br>Seamstress of New England</h1>
+                <p>I was born in the small town of Plesetsk in Northwest Russia and lived in Russia for 37 years. I
+                    graduated from law school there and worked for a long time in the legal profession. But from early
+                    childhood I was always involved in creative work, such as knitting, sewing, embroidering, crafting
+                    various things. Such activities always greatly inspired me, filled me with positive emotions.
+                    Previous generations in my family also engaged in creative work. My great grandfather, who lived in
+                    the country, knitted stockings and other things for the family and taught this skill to his
+                    daughters. My grandmother, who was also named Raisa, was a great craft maker. She crocheted and sold
+                    wonderful bed covers, table cloths and other things. She also wove area rugs and runners out of
+                    colored strings of cloth.
+                    There were very few rugs in those days, and my grandmother had a lot of success selling hers. Her
+                    husband died in 1945 from wounds he sustained during the war, and my grandmother raised her two
+                    children alone, built her own home in the 1960's, and she always worked very hard. I remember how I
+                    helped her weave those rugs on a big wooden loom. My grandmother taught me the fundamental
+                    techniques of craft making.
+                    In addition, my aunt Nina was a professional seamstress. And my mother, who received formal
+                    education in sewing, always made me dresses for the holidays.
+                    For many years I devoted all of my spare time to sewing and craft making, and to an ever deeper
+                    study of the technology of making clothing and accessories. I attended sewing school in Arkhangelsk,
+                    Russia and took courses from excellent teachers with many years of work experience. More recently, I
+                    received a degree in Image Consulting from the Moscow State University of Culture and Art.
+                    I moved to Portland, Maine in 2009 with my American husband, and we settled in Portland where I
+                    started my business. I shipped most of the equipment that I use here in my Studio from Arkhangelsk
+                    before I left. I could never leave my machines behind!
+                    I truly love my work. I view it as an opportunity to give joy to people, to create positive emotions
+                    by doing the very best that I can with each piece of clothing or craft.</p>
+                <a href="#contacts" class="btn">Book Appointment</a>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="./images/owner.jpg" alt="Raisa portrait" />
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: STUDIO TOUR -->
+    <section id="studio-tour">
+        <div class="section-header">
+            <span class="label">01 / Studio</span>
+            <h2>My Studio</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="./images/Studio1.jpg" alt="Studio 1 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio2.jpg" alt="Studio 2 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio3.jpg" alt="Studio 3 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio4.jpg" alt="Studio 4 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio5.jpg" alt="Studio 5 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio6.jpg" alt="Studio 6 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio7.jpg" alt="Studio 7 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio8.jpg" alt="Studio 8 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio9.jpg" alt="Studio 9 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio10.jpg" alt="Studio 10 interior"></div>
+            <div class="gallery-item"><img src="./images/Studio11.jpg" alt="Studio 11 interior"></div>
+        </div>
+    </section>
+
+    <!-- SECTION: SERVICES -->
+    <section id="alterations">
+        <div class="section-header">
+            <span class="label">02 / Services</span>
+            <h2>Dressmaking and tailoring, including wedding and prom dresses.</h2>
+        </div>
+        <div class="service-layout">
+            <div class="service-details">
+                <p>Some occasions demand more than an off-the-rack solution. Whether you are stepping into a high-stakes
+                    professional networking mixer, attending an upscale high-society soirée, or celebrating a milestone
+                    moment, custom dressmaking and tailoring ensure you look entirely unforgettable. From the clean
+                    lines of a sophisticated corporate dress to the breath-taking details of a bespoke gown, every piece
+                    is meticulously engineered to reflect your personal aesthetic and individual frame.
+
+                    Signature Services for Your Most Memorable Moments
+                    Bespoke Wedding Gowns: Your wedding day is a singular event, and your gown should be equally unique.
+                    Custom bridal design combines premium fabrics with precise tailoring to craft a flawless silhouette
+                    that moves beautifully and fits like a second skin.
+                    Prom & Evening Wear: Make a statement with structured, high-fashion silhouettes tailored
+                    specifically for proms, galas, and formal garden parties. Every seam is sculpted to offer both
+                    breathtaking style and effortless comfort all night long.
+                    Custom Corporate Couture: Elevate your professional presence with tailored day dresses, sharp
+                    blazers, and custom separates designed to project confidence and a sleek, presentation-ready look.
+                    Intricate Fabric & Embellishment Handling: Expert manipulation of premium and delicate
+                    materials—including delicate lace overlays, fine silk satin, detailed beadwork, and layered
+                    tulle—ensures structural integrity without sacrificing a clean visual flow.</p>
+                <ul class="spec-list">
+                    <li>Focus <span>Reshaping, Tapering, Hemming</span></li>
+                    <li>Turnaround <span>7 — 10 Business Days</span></li>
+                    <li>Garment Types <span>Suits, Denim, Outerwear, Casuals</span></li>
+                </ul>
+            </div>
+            <div class="service-visual">
+                <img src="./images/dressmaking.jpg" alt="Custom wedding and prom dress"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: BRIDAL ALTERATION -->
+    <section id="bridal">
+        <div class="section-header">
+            <span class="label">03 / Specialist</span>
+            <h2>Alteration/repair of clothing and other articles.</h2>
+        </div>
+        <div class="service-layout">
+            <div class="service-details">
+                <p>A wardrobe is an investment, but even the finest off-the-rack clothing rarely fits perfectly right
+                    out of the box. Professional alteration and repair services bridge the gap between a standard
+                    garment and a flawless, custom-tailored silhouette. Whether it is a sharp corporate dress, a
+                    high-society evening gown, or everyday apparel, expert modifications ensure your clothing speaks to
+                    your personal brand and aesthetic.</p>
+                <ul class="spec-list">
+                    <li>Focus <span>Bustles, Bodice Reshaping, Train Curation</span></li>
+                    <li>Timeline <span>4 — 8 Weeks Recommended</span></li>
+                    <li>Materials <span>Silk, Tulle, Fine Lace, Organza</span></li>
+                </ul>
+            </div>
+            <div class="service-visual">
+                <img src="./images/alteration.jpg" alt="Clothing alteration and repair"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: REPAIR -->
+    <section id="repair">
+        <div class="section-header">
+            <span class="label">04 / Restorations</span>
+            <h2>Custom jewelry</h2>
+        </div>
+        <div class="service-layout">
+            <div class="service-details">
+                <p>Here are some examples of my custom jewelry and accessories, most of them made from semi-precious
+                    stones. These designs can be purchased at my studio. I believe in the special power of natural
+                    stones, which can give us energy and good fortune, can heal us, and can help us attain spiritual
+                    peace and balance. Every stone is unique and has its own significance. You can learn about the
+                    qualities of various stones on the internet and order your own special piece of jewelry custom made
+                    by me, for example one that matches your astrological sign or has some other significance for you.
+                    Write to me and I will be happy to help you. My own positive creative energy will give your piece of
+                    jewelry additional power, imparting my wishes for your happiness and good luck.</p>
+                <ul class="spec-list">
+                    <li>Focus <span>Hardware Replacement, Mending, Linings</span></li>
+                    <li>Scope <span>Premium Textiles & Premium Accessories</span></li>
+                    <li>Philosophy <span>Sustainable Luxury Longevity</span></li>
+                </ul>
+            </div>
+            <div class="service-visual">
+                <img src="./images/jewelry.jpg" alt="Custom jewelry with semi-precious stones"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: GALLERY -->
+
+    <section id="gallery">
+        <div class="section-header">
+            <span class="label">05 / Portfolio</span>
+            <h2>The Studio Journal</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="./images/1.png" alt="Green dress back detail">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/2.png" alt="Green dress front detail">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/3.png" alt="Beige dress side detail">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/4.png" alt="Beige dress back chains">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/5.png" alt="Three women in turquoise dresses">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/6.png" alt="Turquoise dress portrait">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/7.png" alt="Red dress with zebra detail">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/8.png" alt="Portrait by the window">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/9.png" alt="Woman in black and turquoise dress">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/10.png" alt="Close-up portrait in studio">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: TESTIMONIALS -->
+    <section id="testimonials">
+        <div class="section-header">
+            <span class="label">06 / Client Voices</span>
+            <h2>Testimonials</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-item">
+                <p>"Raisa is amazing at what she does. She made me feel so beautiful when trying on my wedding gown
+                    after she altered it perfectly. Her prices are incredibly reasonable and she is very talented and
+                    knowledgeable. I would recommend her in a heartbeat!"</p>
+                <div class="testimonial-author">Carrie D, Portland ME</div>
+            </div>
+            <div class="testimonial-item">
+                <p>"I brought Raisa a vintage dress that needed extensive repair and restructuring. She handled the
+                    delicate fabric with such care and expertise. The result was beyond my expectations—it fit like it
+                    was made just for me. Her attention to detail is extraordinary."</p>
+                <div class="testimonial-author">Jennifer M, South Portland</div>
+            </div>
+            <div class="testimonial-item">
+                <p>"My daughter's prom dress needed significant alterations on short notice. Raisa not only completed
+                    the work beautifully and on time, but she also added special touches that made the dress even more
+                    stunning. She truly cares about her clients and her craft."</p>
+                <div class="testimonial-author">Susan R, Scarborough ME</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: CONTACTS -->
+    <section id="contacts">
+        <div class="section-header">
+            <span class="label">06 / Consultation</span>
+            <h2>Contact Us</h2>
+        </div>
+        <div class="contact-layout">
+            <div class="contact-info">
+                <div class="contact-info">
+                    <h3>899 Brighton Ave, Portland ME</h3>
+                    <p>By Appointment Only</p>
+                </div>
+
+                <p>New England Region / Studio Headquarters</p>
+
+                <h3>Contact Coordinates</h3>
+                <p>Inquiries: raisasewing@gmail.com</p>
+                <p>Facebook: <a
+                        href="https://www.facebook.com/people/Raisas-Sewing-Accessories/100064220551023/?ref=ts#"
+                        target="_blank" style="color: var(--text-main); text-decoration: underline;">Raisa's Sewing and
+                        Accessories</a></p>
+                <p>Google Reviews: <a
+                        href="https://www.google.com/maps/place/Raisa's+Sewing+%26+Accessories/@43.6736616,-70.3180142,17z/data=!4m8!3m7!1s0x4cb29b9d33d66c23:0x8cdfa77096173f9d!8m2!3d43.6736577!4d-70.3154393!9m1!1b1!16s%2Fg%2F1v_0jbst?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" style="color: var(--text-main); text-decoration: underline;">Read our
+                        reviews</a></p>
+                <p>Yelp: <a
+                        href="https://www.yelp.com/biz/raisas-sewing-and-accessories-portland?osq=raisa%27s+sewing+and+accessoiries"
+                        target="_blank" style="color: var(--text-main); text-decoration: underline;">Read our
+                        reviews</a></p>
+
+                <h3>Hours of Operation</h3>
+                <p>Mon: 3 PM - 6 PM</p>
+                <p>Tue- Fr: 10 AM - 5 PM</p>
+                <p>Sat, Sun, Holidays: Closed</p>
+            </div>
+
+            <!-- MINIMALIST CONTACT FORM -->
+            <div>
+                <form onsubmit="event.preventDefault(); 
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const service = document.getElementById('service').value;
+                    const message = document.getElementById('message').value;
+                    const subject = 'Inquiry from ' + name;
+                    const body = 'Full Name: ' + name + '\n\n' +
+                                 'Email Address: ' + email + '\n' +
+                                 'Phone Number: ' + phone + '\n' +
+                                 'Requested Service: ' + service + '\n\n' +
+                                 'Project Description / Notes:\n' + message;
+                    window.location.href = 'mailto:info@atelierraisa.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+                    return false;">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Requested Service</label>
+                        <select id="service" required>
+                            <option value="">Select a service...</option>
+                            <option value="Wedding Dress - Custom Design">Wedding Dress - Custom Design</option>
+                            <option value="Wedding Dress - Alteration">Wedding Dress - Alteration</option>
+                            <option value="Prom Dress - Custom Design">Prom Dress - Custom Design</option>
+                            <option value="Prom Dress - Alteration">Prom Dress - Alteration</option>
+                            <option value="Evening Wear - Custom Design">Evening Wear - Custom Design</option>
+                            <option value="Corporate Dress - Custom Design">Corporate Dress - Custom Design</option>
+                            <option value="Clothing Alteration">Clothing Alteration</option>
+                            <option value="Clothing Repair">Clothing Repair</option>
+                            <option value="Custom Jewelry">Custom Jewelry</option>
+                            <option value="Other">Other (Please describe in notes)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Description / Notes</label>
+                        <textarea id="message" placeholder="Describe your garment specifications..."></textarea>
+                    </div>
+                    <button type="submit">Submit Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; 2026 Atelier Raisa. All Rights Reserved. Choose Yourself.
+    </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Full screen view">
+        </div>
+    </div>
+
+    <!-- INTERACTION LOGIC: ACTIVE SCROLL MENUS, STAGGERED ANIMATIONS, LIGHTBOX, THEME SWITCHER -->
+    <script>
+        // Theme switcher with localStorage persistence
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme on page load
+        (function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+
+        // Active navigation on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 120)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Staggered loading animations with Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.classList.add('fade-in-up');
+            observer.observe(item);
+        });
+
+        // Observe testimonials
+        document.querySelectorAll('.testimonial-item').forEach(item => {
+            item.classList.add('fade-in-up');
+            observer.observe(item);
+        });
+
+        // Observe service sections
+        document.querySelectorAll('.service-layout').forEach(item => {
+            item.classList.add('fade-in-up');
+            observer.observe(item);
+        });
+
+        // Lightbox functionality
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Add click listeners to gallery images
+        document.querySelectorAll('.gallery-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                openLightbox(img.src);
+            });
+        });
+
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+
+</html>
